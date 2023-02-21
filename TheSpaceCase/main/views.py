@@ -10,3 +10,16 @@ def main_page(request : HttpRequest):
     
     return render(request, 'main/index.html')
 
+def contact_page(request : HttpRequest):
+    
+    return render(request, 'main/contact.html')
+
+def posts_page(request : HttpRequest):
+    
+    return render(request, 'main/posts.html')
+
+def certificates_page(request : HttpRequest):
+    
+    return render(request, 'main/certificates.html')
+
+
