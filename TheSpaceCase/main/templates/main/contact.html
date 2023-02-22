@@ -19,7 +19,8 @@
                 <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: e.balgasim@hotmail.com</p>
             </div>
             <div class="col-4">
-            <form action="/action_page.php" target="_blank">
+            <form action="" method="post">
+                {% csrf_token %}
                 <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
                 <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
                 <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
