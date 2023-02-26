@@ -5,19 +5,19 @@ from .models import Contact,Company,Certificate,Post
 
 #to customize the panel
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name','email','subject')
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name','website')
 
 
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('name','certificate_id')
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('title','created_date','company')
 
 
 
