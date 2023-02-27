@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %} Certificate {% endblock %}
+{% block title %} Company {% endblock %}
 
 {% block content %}
 
@@ -20,10 +20,10 @@
                       </div>
                       <div class="post-meta">
                         <ul class="list-unstyled mb-0">
-                          <li>{{ view_certificate.issuing_organization }}</li>
+                          <li>{{ view_certificate.email }}</li>
                         </ul>
                       </div>
-                      <p class="mb-30 ms-2"><a href="{{ view_certificate.certificate_url }}">Website</a></p>
+                      <p class="mb-30 ms-2"><a href="{{ view_certificate.website }}" target="_blank">Website</a></p>
                   </div>
                   </div>
                 </div>

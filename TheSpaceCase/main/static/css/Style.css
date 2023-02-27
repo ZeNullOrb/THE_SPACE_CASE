@@ -1,4 +1,8 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Raleway", "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  line-height: 1.5em;
+}
 
 body, html {
   height: 100%;
@@ -11,6 +15,7 @@ body, html {
   background-size: cover;
   background-image: url("../img/index.jpg");
   min-height: 100%;
+  margin-top: -100px;
 }
 
 .w3-bar .w3-button {
@@ -21,6 +26,343 @@ body, html {
     size: 10%;
 }
 
-a:link { 
-  text-decoration: none; 
+/* cards */
+
+.section-gray {
+  background: #E5E5E5;
+  padding: 60px 0 30px 0;
+}
+
+.card .ftr div {
+  display: inline-block;
+}
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card .card-image {
+  height: 60%;
+  position: relative;
+  overflow: hidden;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: -30px;
+  border-radius: 6px;
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.card .card-image .card-caption {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: #fff;
+  font-size: 1.3em;
+  text-shadow: 0 2px 5px rgba(33, 33, 33, 0.5);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.img-raised {
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* ============ Card Table ============ */
+
+.table {
+  margin-bottom: 0px;
+}
+
+.card .table {
+  padding: 15px 30px;
+}
+
+
+.card [class*="table-"] .author a,
+.card [class*="table-"] .ftr .stats,
+.card [class*="table-"] .category,
+.card [class*="table-"] .card-description {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.card .table-primary {
+  background: linear-gradient(60deg, #ab47bc, #7b1fa2);
+}
+
+/* ============ Card Blog ============ */
+
+.card-blog {
+  margin-top: 30px;
+}
+
+.card-blog .card-caption {
+  margin-top: 5px;
+}
+
+.card-blog .card-image + .category {
+  margin-top: 20px;
+}
+
+.card-raised {
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.card .author a .ripple-cont {
+  display: none;
+}
+
+/* ============ Card Background ============ */
+
+.card-background .category,
+.card-background .card-description,
+.card-background small {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============ Card Category ============ */
+
+.category {
+  position: relative;
+  line-height: 0;
+  margin: 15px 0;
+}
+
+/* ============ Text Color ============ */
+
+.text-info {
+  color: #00bcd4;
+}
+
+/* ============ card description ============ */
+
+.card-description p {
+  color: #888;
+}
+
+
+/*---------------------------------------------------------------------- /
+BUTTONS
+----------------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn,
+.navbar .navbar-nav > li > a.btn {
+  border: none;
+  border-radius: 3px;
+  position: relative;
+  padding: 12px 30px;
+  margin: 10px 1px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  will-change: box-shadow, transform;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:focus,
+.btn:active,
+.btn:active:focus {
+  outline: 0;
+}
+
+.btn.btn-round,
+.navbar .navbar-nav > li > a.btn.btn-round {
+  border-radius: 30px;
+}
+
+.btn.btn-just-icon,
+.navbar .navbar-nav > li > a.btn.btn-just-icon {
+  font-size: 20px;
+  padding: 12px 12px;
+  line-height: 1em;
+}
+
+.btn.btn-just-icon i,
+.navbar .navbar-nav > li > a.btn.btn-just-icon i {
+  width: 20px;
+}
+
+
+/* Button Info */
+
+.btn.btn-info {
+  background-color: #00bcd4;
+  color: #FFFFFF;
+}
+
+.btn.btn-info:focus,
+.btn.btn-info:active,
+.btn.btn-info:hover {
+  box-shadow: 0 14px 26px -12px rgba(0, 188, 212, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2);
+}
+
+
+/* Button Danger */
+
+.btn.btn-danger {
+  background-color: #f44336;
+  color: #FFFFFF;
+}
+
+.btn.btn-danger:focus,
+.btn.btn-danger:active,
+.btn.btn-danger:hover {
+  box-shadow: 0 14px 26px -12px rgba(244, 67, 54, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2);
+}
+
+
+/* Button Warning */
+
+.btn.btn-warning.btn-simple:hover,
+.btn.btn-warning.btn-simple:focus,
+.btn.btn-warning.btn-simple:active {
+  background-color: transparent;
+  color: #ff9800;
+}
+
+.btn.btn-warning.btn-simple,
+.navbar .navbar-nav > li > a.btn.btn-warning.btn-simple {
+  background-color: transparent;
+  color: #ff9800;
+  box-shadow: none;
+}
+
+.btn.btn-warning,
+.navbar .navbar-nav > li > a.btn.btn-warning {
+  box-shadow: 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12);
+}
+
+
+/* Button Rose */
+
+.btn.btn-rose.btn-simple:hover,
+.btn.btn-rose.btn-simple:focus,
+.btn.btn-rose.btn-simple:active {
+  background-color: transparent;
+  color: #e91e63;
+}
+
+.btn.btn-rose.btn-simple,
+.navbar .navbar-nav > li > a.btn.btn-rose.btn-simple {
+  background-color: transparent;
+  color: #e91e63;
+  box-shadow: none;
+}
+
+
+/* Button White */
+
+.btn.btn-white,
+.btn.btn-white:focus,
+.btn.btn-white:hover {
+  background-color: #FFFFFF;
+  color: #888;
+}
+
+.btn.btn-white.btn-simple,
+.navbar .navbar-nav > li > a.btn.btn-white.btn-simple {
+  color: #FFFFFF;
+  background: transparent;
+  box-shadow: none;
+}
+
+
+a:link {
+  color: gray;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, .h1 {
+  font-size: 3.8em;
+}
+
+h2, .h2 {
+  font-size: 2.0em;
+  line-height: 1.6em;
+  margin: 15px 0 15px;
+  font-weight: 700;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+  text-align: center;
+}
+
+h3, .h3 {
+  font-size: 1.825em;
+  line-height: 1.4em;
+  margin: 30px 0 30px;
+  font-weight: 700;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+  text-align: center;
+}
+
+h4, .h4 {
+  font-size: 1.3em;
+  line-height: 1.55em;
+}
+
+h5, .h5 {
+  font-size: 1.25em;
+  line-height: 1.55em;
+  margin-bottom: 15px;
+}
+
+h6, .h6 {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.content-box{
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+
+.main{
+  margin-top: 100px;
 }

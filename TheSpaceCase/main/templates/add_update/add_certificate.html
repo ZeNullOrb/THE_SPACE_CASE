@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %} Add a New Certificates {% endblock %}
+
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group m-5">
+            <label class="col-md-2 control-label">Add a New Certificate</label>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Certificate Name</label>
+                    <div class="col-md-10">
+                        <input class="form-control" name="name" type="text" placeholder="Certificate Name" required>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Certificate organization</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" name="issuing_organization" rows="5" placeholder="Certificate organization" required></textarea>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Certificate ID</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" name="certificate_id" type="number" placeholder="Certificate id" required>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Certificate URL</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="certificate_url" type="url" placeholder="Certificate URL" required>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-dark mt-3" value="New Certificate" />
+        </div>
+    </form>
+
+{% endblock %}

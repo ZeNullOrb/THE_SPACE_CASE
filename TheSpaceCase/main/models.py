@@ -13,6 +13,7 @@ class Contact(models.Model):
 
 class Company(models.Model):
 
+    image = models.ImageField(upload_to="images/", default="images/company_default.jpg")
     name = models.CharField(max_length=512)
     email = models.EmailField()
     address = models.CharField(max_length=1024)
@@ -25,10 +26,9 @@ class Company(models.Model):
 
 class Certificate(models.Model):
 
+    image = models.ImageField(upload_to="images/", default="images/certificate.jpg")
     name = models.CharField(max_length=512)
     issuing_organization = models.CharField(max_length=1024)
-    issue_date = models.DateField()
-    expiration_date = models.DateField()
     certificate_id = models.IntegerField()
     certificate_url = models.URLField()
     
@@ -37,7 +37,7 @@ class Certificate(models.Model):
 
 class Post(models.Model):
     
-    image = models.ImageField(upload_to="images/", default="images/default.jpg")
+    image = models.ImageField(upload_to="images/", default="images/post_default.jpg")
     title = models.CharField(max_length=512)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)

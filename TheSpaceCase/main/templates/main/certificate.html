@@ -10,20 +10,29 @@
 <div class="w3-container" style="padding:128px 16px" id="team">
     <h3 class="w3-center">CERTIFICATES</h3>
     <p class="w3-center w3-large">Avaiable certificates</p>
-    <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-      {% for certificate in view_certificate %}
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <div class="w3-container">
-            <h3><a href="{% url 'main:view_certificate' certificate.id %}">{{ certificate.name }}</a></h3>
-            <p class="w3-opacity">{{ certificate.issuing_organization }}</p>
-            <p><a href="{{ certificate.certificate_url }}" target="_blank"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope me-2"></i>Check the website</button></a></p>
-          </div>
+    {% if request.user.is_staff %}
+    <div class="w3-center">
+      <a href="{% url 'main:add_certificate' %}" class="btn btn-danger btn-round">Add Certificate</a>
+    </div>
+    {% endif %}
+    <!-- BACKGROUND CARDS -->
+    <div class="cards-3 section-gray">
+      <div class="container">
+        <div class="row">
+          {% for certificate in view_certificate %}
+            <div class="col-md-6">
+              <div class="card card-background" style="background-image: url('{{ certificate.image.url }}')">
+                  <div class="table">
+                      <h6 class="category text-info">{{ certificate.issuing_organization }}</h6>
+                      <a href="{% url 'main:view_certificate' certificate.id %}"><h3 class="card-caption">{{ certificate.name }}</h3></a>
+                      <div class="w3-center" style="margin-bottom: -15px;"><a href="{{ certificate.certificate_url }}" target="_blank" class="btn btn-warning btn-round"> <i class="fa fa-envelope me-2"></i>Check the website</a></div>
+                  </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
-      {% endfor %}
     </div>
-  </div>
-
+</div>
 
 {% endblock %}

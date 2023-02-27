@@ -11,23 +11,31 @@
   <div class="w3-container" style="padding:128px 16px" id="team">
     <h3 class="w3-center">THE POSTS</h3>
     <p class="w3-center w3-large">Where you can start your career</p>
-    <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-      {% for post in view_post %}
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <img src="{{ post.image.url }}" alt="John" style="width:100%">
-          <div class="w3-container">
-            <h3><a href="#">{{ post.title }}</a></h3>
-            <p class="w3-opacity"><a href="#">{{ post.company }}</a></p>
-            <p style="width: 400px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ post.content }}</p>
-            {% for certificate in post.certificate.all %}
-            <p><button class="w3-button w3-light-grey w3-block"><i class="me-2 bi bi-patch-check"></i><a href="#">{{ certificate.name }}</a></button></p>
-            {% endfor %}
-          </div>
+      <!-- PLAIN CARDS -->
+      <div class="cards-2 section-gray">
+        <div class="container">
+            <div class="row">
+            {% for post in view_post %}
+                <div class="col-md-4">
+                    <div class="card card-blog">
+                        <div class="card-image">
+                            <img class="img img-raised" src="{{ post.image.url }}" alt="John" style="width:100%">
+                            <div class="ripple-cont"></div>
+                        </div>
+                        <div class="table">
+                        <h3 class="card-caption"><a href="{% url 'main:view_post' post.id %}">{{ post.title }}</a></h3>
+                          <h6 class="category text-info"><a href="{{ post.company.website }}">{{ post.company }}</a></h6>
+                          <h4 class="card-caption content-box">{{ post.content }}</h4>
+                          {% for certificate in post.certificate.all %}
+                            <a href="{% url 'main:view_certificate' certificate.id %}" class="btn btn-warning btn-round"> <i class="me-1 bi bi-patch-check"></i>{{ certificate.name }}</a>
+                          {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
       </div>
-      {% endfor %}
-    </div>
   </div>
 
 
