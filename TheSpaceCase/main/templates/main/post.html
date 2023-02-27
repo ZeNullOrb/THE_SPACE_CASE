@@ -7,24 +7,28 @@
 
 
 <!-- Team Section -->
-{% for post in view_post %}
+
   <div class="w3-container" style="padding:128px 16px" id="team">
     <h3 class="w3-center">THE POSTS</h3>
     <p class="w3-center w3-large">Where you can start your career</p>
     <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+      {% for post in view_post %}
       <div class="w3-col l3 m6 w3-margin-bottom">
         <div class="w3-card">
-          <img src="{% static 'img/TIP.jpg' %}" alt="John" style="width:100%">
+          <img src="{{ post.image.url }}" alt="John" style="width:100%">
           <div class="w3-container">
-            <h3>{{ post.title }}</h3>
-            <p class="w3-opacity">{{ post.company }}</p>
-            <p>{{ post.content }}</p>
-            <p><button class="w3-button w3-light-grey w3-block"><i class="me-2 bi bi-patch-check"></i>{{ post.certificate }}</button></p>
+            <h3><a href="#">{{ post.title }}</a></h3>
+            <p class="w3-opacity"><a href="#">{{ post.company }}</a></p>
+            <p style="width: 400px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ post.content }}</p>
+            {% for certificate in post.certificate.all %}
+            <p><button class="w3-button w3-light-grey w3-block"><i class="me-2 bi bi-patch-check"></i><a href="#">{{ certificate.name }}</a></button></p>
+            {% endfor %}
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
-{% endfor %}
+
 
 {% endblock %}

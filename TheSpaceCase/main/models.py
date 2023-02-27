@@ -37,11 +37,12 @@ class Certificate(models.Model):
 
 class Post(models.Model):
     
+    image = models.ImageField(upload_to="images/", default="images/default.jpg")
     title = models.CharField(max_length=512)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
+    certificate = models.ManyToManyField(Certificate,  related_name="certificates")
 
     def __str__(self) -> str:
         return f"{self.title}"

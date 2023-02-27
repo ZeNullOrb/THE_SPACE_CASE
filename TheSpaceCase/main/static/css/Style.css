@@ -20,3 +20,7 @@ body, html {
 .logo{
     size: 10%;
 }
+
+a:link { 
+  text-decoration: none; 
+}
