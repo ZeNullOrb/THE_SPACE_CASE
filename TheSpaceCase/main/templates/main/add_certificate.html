@@ -5,37 +5,33 @@
 
 {% block content %}
 
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="form-group m-5">
-            <label class="col-md-2 control-label">Add a New Certificate</label>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Certificate Name</label>
-                    <div class="col-md-10">
-                        <input class="form-control" name="name" type="text" placeholder="Certificate Name" required>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Certificate organization</label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" name="issuing_organization" rows="5" placeholder="Certificate organization" required></textarea>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Certificate ID</label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" name="certificate_id" type="number" placeholder="Certificate id" required>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Certificate URL</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="certificate_url" type="url" placeholder="Certificate URL" required>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<style>
+    
+    input{
+        border-radius: 20px;
+    }
+</style>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="article-clean">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+              <div class="intro">
+                  <h1 class="text-center"><input class="w3-center" style="padding: 5px 0 5px 0; width: 950px;" name="name" type="text" placeholder="Certificate Name" required></h1>
+                  <p class="text-center"><span class="by"><input class="w3-center" style="padding: 5px 0 5px 0; width: 200px;" type="text" name="issuing_organization" placeholder="Certificate organization" required></span></p>
+                  <p class="text-center"><span class="by"><input class="w3-center" style="padding: 5px 0 5px 0; width: 200px;" name="certificate_id" type="number" placeholder="Certificate id" required></span></p>
+                  <p class="text-center"><span class="by"><input class="w3-center" style="padding: 5px 0 5px 0; width: 450px;" name="certificate_url" type="url" placeholder="Certificate URL" required></span></p>
+              </div>
+                <div class="w3-center" style="margin-bottom: -15px;"><button class="btn btn-round" style="color: white; background-color: #506568;"> <i class="fa fa-envelope me-2"></i>New Certificate</button></div>
+              <br>
             </div>
-            <input type="submit" class="btn btn-dark mt-3" value="New Certificate" />
+          </div>
         </div>
-    </form>
+      </div>      
+</form>
+
 
 {% endblock %}

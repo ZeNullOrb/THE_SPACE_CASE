@@ -11,7 +11,12 @@ def register_user(request : HttpRequest):
 
     if request.method == "POST":
         try:
-            new_user = User.objects.create_user(username=request.POST["username"], email=request.POST["email"], password=request.POST["password"], first_name = request.POST["first_name"], last_name = request.POST["last_name"])
+            new_user = User.objects.create_user(
+                username=request.POST["username"], 
+                email=request.POST["email"], 
+                password=request.POST["password"], 
+                first_name = request.POST["first_name"], 
+                last_name = request.POST["last_name"])
             new_user.save()
 
             #if register successful redirect to sign in page

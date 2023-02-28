@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %} Update Certificate {% endblock %}
+
+{% block content %}
+
+<style>
+    
+    input{
+        border-radius: 20px;
+    }
+</style>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="article-clean">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+              <div class="intro">
+                  <h1 class="text-center">
+                    <input class="w3-center" style="padding: 5px 0 5px 0; width: 950px;" 
+                    name="name" type="text" value="{{ certificate.name }}" placeholder="{{ certificate.name }}" required></h1>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 200px;" type="text" 
+                        name="issuing_organization" value="{{ certificate.issuing_organization }}" placeholder="{{ certificate.issuing_organization }}" required>
+                    </span>
+                </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 200px;" 
+                        name="certificate_id" type="number" value="{{ certificate.certificate_id }}" placeholder="{{ certificate.certificate_id }}" required>
+                    </span>
+                </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 450px;" 
+                        name="certificate_url" type="url" value="{{ certificate.certificate_url }}" placeholder="{{ certificate.certificate_url }}" required>
+                    </span>
+                </p>
+              </div>
+                <div class="w3-center" style="margin-bottom: -15px;">
+                    <button class="btn btn-round" style="color: white; background-color: #506568;">
+                        <i class="fa fa-envelope me-2"></i>Update Certificate
+                    </button>
+                </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>      
+</form>
+
+
+{% endblock %}

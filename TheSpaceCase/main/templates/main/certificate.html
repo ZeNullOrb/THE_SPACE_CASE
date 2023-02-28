@@ -12,7 +12,7 @@
     <p class="w3-center w3-large">Avaiable certificates</p>
     {% if request.user.is_staff %}
     <div class="w3-center">
-      <a href="{% url 'main:add_certificate' %}" class="btn btn-danger btn-round">Add Certificate</a>
+      <a href="{% url 'main:add_certificate' %}" class="btn btn-primary btn-round" style="color: white;">Add Certificate</a>
     </div>
     {% endif %}
     <!-- BACKGROUND CARDS -->
@@ -25,7 +25,18 @@
                   <div class="table">
                       <h6 class="category text-info">{{ certificate.issuing_organization }}</h6>
                       <a href="{% url 'main:view_certificate' certificate.id %}"><h3 class="card-caption">{{ certificate.name }}</h3></a>
-                      <div class="w3-center" style="margin-bottom: -15px;"><a href="{{ certificate.certificate_url }}" target="_blank" class="btn btn-warning btn-round" style="color: blue;"> <i class="fa fa-envelope me-2"></i>Check the website</a></div>
+                      <div class="w3-center" style="margin-bottom: -15px;">
+                        <a href="{{ certificate.certificate_url }}" target="_blank" class="btn btn-warning btn-round" 
+                        style="color: blue;"> <i class="fa fa-envelope me-2"></i>Check the website
+                        </a>
+                      </div>
+                      {% if request.user.is_staff %}
+                      <div class="w3-center">
+                        <a href="{% url 'main:update_certificate' certificate.id %}" class="btn btn-success btn-round" style="color: white;">Update Certificate</a>
+                        <a href="{% url 'main:delete_certificate' certificate.id %}" class="btn btn-danger btn-round" style="color: white;">Delete Certificate</a>
+                      </div>
+                      {% endif %}
+                  
                   </div>
               </div>
             </div>
