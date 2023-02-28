@@ -42,7 +42,7 @@ class Post(models.Model):
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    certificate = models.ManyToManyField(Certificate,  related_name="certificates")
+    certificate = models.ManyToManyField(Certificate,  related_name="certificates", null=True)
 
     def __str__(self) -> str:
         return f"{self.title}"

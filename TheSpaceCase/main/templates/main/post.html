@@ -27,7 +27,7 @@
                           <h6 class="category text-info"><a href="{{ post.company.website }}">{{ post.company }}</a></h6>
                           <h4 class="card-caption content-box">{{ post.content }}</h4>
                           {% for certificate in post.certificate.all %}
-                            <a href="{% url 'main:view_certificate' certificate.id %}" class="btn btn-warning btn-round"> <i class="me-1 bi bi-patch-check"></i>{{ certificate.name }}</a>
+                            <a href="{% url 'main:view_certificate' certificate.id %}" class="btn btn-warning btn-round" style="color: blue;"> <i class="me-1 bi bi-patch-check"></i>{{ certificate.name }}</a>
                           {% endfor %}
                         </div>
                     </div>

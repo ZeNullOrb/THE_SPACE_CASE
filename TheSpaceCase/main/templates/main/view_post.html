@@ -5,38 +5,27 @@
 
 {% block content %}
 
-<div class="main-content paddsection">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-md-offset-2">
-          <div class="row">
-            <div class="container-main single-main">
-              <div class="col-md-12">
-                <div class="block-main mb-30">
-                  <div class="container">
-                    <div class="content-main single-post padDiv">
-                      <div class="journal-txt ms-2 mt-5">
-                        <h4 style="color: white;">{{ view_post.title }}</h4>
-                      </div>
-                      <div class="post-meta">
-                        <ul class="list-unstyled mb-0">
-                          <li>{{ view_post.company }}</li>
-                        </ul>
-                      </div>
-                      <p class="mb-30 ms-2"><a href="{{ view_post.certificates.certificate_url }}" target="_blank">Website</a></p>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+<div class="article-clean">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+        <div class="intro">
+            <h1 class="text-center">{{ view_post.title }}</h1>
+            <p class="text-center"><span class="by">by </span><a href="{{ view_post.company.website }}" target="_blank">{{ view_post.company }}</a><span class="date">{{ view_post.created_date }}</span></p>
+            <img class="img-fluid" src="{{ view_post.image.url }}" alt="">
         </div>
+        <div class="text">
+          <p>{{ view_post.content }}</p>
+        </div>
+        <div class="w3-center" style="margin-bottom: -15px;">
+          <a href="{{ view_post.certificates.certificate_url }}" target="_blank" class="btn btn-success btn-round" style="color: white;"> <i class="fa fa-envelope me-2"></i>Check the website</a>
+        </div>
+        <br>
       </div>
     </div>
+  </div>
 </div>
-
-
-
 
 
 {% endblock %}

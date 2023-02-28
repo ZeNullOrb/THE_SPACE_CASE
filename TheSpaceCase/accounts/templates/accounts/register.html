@@ -1,48 +1,47 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %} Register New User {% endblock %}
 
 
 {% block content %}
+<style>
+  label{
+    opacity: 0.8;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 
-<div class="container">
-    <h1>Register New user</h1>
+  .login-dark form {
+  max-width:500px;
+  width:90%;
+  }
 
-    <form method="post" action="">
-        {% csrf_token %}
-        <h2 class="h3 mb-3 fw-normal">Please sign up / Register</h2>
+</style>
+
+
+<div class="login-dark" style="margin-top: -50px;">
+  <form method="post" action="">
+    {% csrf_token %}
     
-        <div class="form-floating mt-2">
-            <input name="username" type="text" class="form-control"  placeholder="username">
-            <label for="floatingInput">User Name</label>
-          </div>
-
-        <div class="form-floating mt-2">
-          <input name="email" type="email" class="form-control"  placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
-        </div>
-
-        <div class="form-floating mt-2">
-            <input name="first_name" type="text" class="form-control" id="floatingInput" placeholder="First Name">
-            <label for="floatingInput">First Name</label>
-        </div>
-
-
-        <div class="form-floating mt-2">
-            <input name="last_name" type="text" class="form-control" id="floatingInput" placeholder="username">
-            <label for="floatingInput">Last Name</label>
-        </div>
-
-        <div class="form-floating mt-2">
-          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
-    
-        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
-      </form>
-
+      <div class="illustration"><i class="bi bi-person-add"></i></div>
+      {% if msg %}
+            <h6 class="text-danger" >{{msg}}</h6>
+      {% endif %}
+      <label for="username">Username</label>
+      <div class="form-group"><input class="form-control" id="username" type="username" name="username" placeholder="Username"></div>
+      <label for="first_name">First name</label>
+      <div class="form-group"><input class="form-control" id="first_name" type="first_name" name="first_name" placeholder="Password"></div>
+      <label for="last_name">Last name</label>
+      <div class="form-group"><input class="form-control" id="last_name" type="last_name" name="last_name" placeholder="Password"></div>
+      <label for="email">Email</label>
+      <div class="form-group"><input class="form-control" id="email" type="email" name="email" placeholder="Password"></div>
+      <label for="password">Password</label>
+      <div class="form-group"><input class="form-control" id="password" type="password" name="password" placeholder="Password"></div>
+      <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
+    </form>
 </div>
+
 
 
 {% endblock %}

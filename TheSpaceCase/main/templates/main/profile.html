@@ -5,37 +5,46 @@
 
 {% block content %}
 
-<div class="container">
+<style>
+  label{
+    opacity: 0.8;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 
-    <form method="post" action="">
-        {% csrf_token %}
-        <h2 class="h3 mb-3 fw-normal">Welcome {{ user.first_name }}</h2>
-        <p class="h3 mb-3 fw-normal">You can Update you information here</p>
-        <div class="form-floating mt-2">
-            <input name="username" type="text" class="form-control" value="{{ user.username }}" placeholder="{{ user.username }}">
-            <label for="floatingInput">User Name</label>
-          </div>
+  .login-dark form {
+  max-width:500px;
+  width:90%;
+  }
 
-        <div class="form-floating mt-2">
-          <input name="email" type="email" class="form-control" value="{{ user.email }}" placeholder="{{ user.email }}">
-          <label for="floatingInput">Email address</label>
-        </div>
-
-        <div class="form-floating mt-2">
-            <input name="first_name" type="text" class="form-control" id="floatingInput" value="{{ user.first_name }}" placeholder="{{ user.first_name }}">
-            <label for="floatingInput">First Name</label>
-        </div>
+</style>
 
 
-        <div class="form-floating mt-2">
-            <input name="last_name" type="text" class="form-control" id="floatingInput" value="{{ user.last_name }}" placeholder="{{ user.last_name }}">
-            <label for="floatingInput">Last Name</label>
-        </div>
-    
-        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Update</button>
-      </form>
+<div class="login-dark" style="margin-top: -50px;">
+  <form method="post" action="">
+    {% csrf_token %}
 
+      <div class="illustration"><i class="bi bi-person"></i></div>
+      <h2 class="h3 mb-3 fw-normal">Welcome {{ user.first_name }}</h2>
+      <div class="w3-center"><p class="mb-3 fw-normal">You can Update you information here</p></div>
+      {% if msg == "User already exist" %}
+            <h6 class="text-danger" >{{msg}}</h6>
+      {% elif msg == "Updated successfully!"%}
+            <h6 class="text-success" >{{msg}}</h6>
+      {% else %}
+      {% endif %}
+      <label for="username">Username</label>
+      <div class="form-group"><input class="form-control" id="username" type="username" name="username" value="{{ user.username }}" placeholder="{{ user.username }}"></div>
+      <label for="first_name">First name</label>
+      <div class="form-group"><input class="form-control" id="first_name" type="first_name" name="first_name" value="{{ user.first_name }}" placeholder="{{ user.first_name }}"></div>
+      <label for="last_name">Last name</label>
+      <div class="form-group"><input class="form-control" id="last_name" type="last_name" name="last_name" value="{{ user.last_name }}" placeholder="{{ user.last_name }}"></div>
+      <label for="email">Email</label>
+      <div class="form-group"><input class="form-control" id="email" type="email" name="email" value="{{ user.email }}" placeholder="{{ user.email }}"></div>
+      <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
+    </form>
 </div>
+
 
 
 {% endblock %}

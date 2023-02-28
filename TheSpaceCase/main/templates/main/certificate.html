@@ -25,7 +25,7 @@
                   <div class="table">
                       <h6 class="category text-info">{{ certificate.issuing_organization }}</h6>
                       <a href="{% url 'main:view_certificate' certificate.id %}"><h3 class="card-caption">{{ certificate.name }}</h3></a>
-                      <div class="w3-center" style="margin-bottom: -15px;"><a href="{{ certificate.certificate_url }}" target="_blank" class="btn btn-warning btn-round"> <i class="fa fa-envelope me-2"></i>Check the website</a></div>
+                      <div class="w3-center" style="margin-bottom: -15px;"><a href="{{ certificate.certificate_url }}" target="_blank" class="btn btn-warning btn-round" style="color: blue;"> <i class="fa fa-envelope me-2"></i>Check the website</a></div>
                   </div>
               </div>
             </div>

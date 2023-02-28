@@ -15,7 +15,7 @@
           <img src="{% static 'img/team.jpg' %}" alt="John" style="width:100%">
           {% for company in view_company %}
           <div class="w3-container">
-            <h3>{{ company.name }}</h3>
+            <h3><a href="{% url 'main:view_company' company.id %}">{{ company.name }}</a></h3>
             <p class="w3-opacity">{{ company.email }}</p>
             <p><a href="{{ company.website }}" target="_blank">Visit our website</a></p>
               <p class="content-box">{{ company.description }}</p>

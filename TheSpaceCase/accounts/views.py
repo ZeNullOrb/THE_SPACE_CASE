@@ -7,13 +7,20 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def register_user(request : HttpRequest):
+    loggin_msg = None
 
     if request.method == "POST":
-        new_user = User.objects.create_user(username=request.POST["username"], email=request.POST["email"], password=request.POST["password"], first_name = request.POST["first_name"], last_name = request.POST["last_name"])
-        new_user.save()
+        try:
+            new_user = User.objects.create_user(username=request.POST["username"], email=request.POST["email"], password=request.POST["password"], first_name = request.POST["first_name"], last_name = request.POST["last_name"])
+            new_user.save()
 
-        #if register successful redirect to sign in page
-        return redirect("accounts:login_user")
+            #if register successful redirect to sign in page
+            return redirect("accounts:login_user")
+        except :
+            loggin_msg = "User already exist"
+        
+
+        return render(request, "accounts/register.html", {"msg" : loggin_msg})
 
 
     return render(request, "accounts/register.html")
@@ -44,3 +51,8 @@ def logout_user(request : HttpRequest):
     logout(request)
 
     return redirect("main:main_page")
+
+
+def no_permission(request : HttpRequest):
+
+    return render(request, "accounts/no_permission.html")

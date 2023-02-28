@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Company,Certificate,Post,Contact
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -22,17 +23,24 @@ def contact_page(request : HttpRequest):
     context = {"view_contact" : view_contact}
     return render(request, "main/contact.html", context)
 
-def profile_page(request : HttpRequest):
+def profile_page(request : HttpRequest): 
+    
     user : User = request.user
+    update_msg = None
     if request.method == "POST":
-        user.username = request.POST["username"]
-        user.first_name = request.POST["first_name"]
-        user.last_name = request.POST["last_name"]
-        user.email = request.POST["email"]
-
-        user.save()
-        return redirect("main:profile_page")
-    context = {"user" : user}
+        try:
+            user.username = request.POST.get('username', user.username)
+            user.first_name = request.POST["first_name"]   
+            user.last_name = request.POST.get("last_name",user.last_name)     
+            user.email = request.POST["email"]
+        except IntegrityError:
+            update_msg = "User already exist"
+        else:
+            update_msg = "Updated successfully!"
+            user.save()
+        
+        return render(request, "main/profile.html", {"msg" : update_msg})
+    context = {"user" : user, "msg" : update_msg}
     return render(request, "main/profile.html", context)
 
 # ---------------------------------------------------POST-----------------------------------------------------------
@@ -47,7 +55,7 @@ def post_page(request : HttpRequest):
 def add_post(request : HttpRequest):
 
     if not request.user.has_perm("main.add_post"):
-        return redirect("main/no_permission.html")
+        return redirect("accounts:no_permission")
 
     if request.method == "POST":
         company = Company.objects.get(id=request.POST["company"])
@@ -61,7 +69,7 @@ def add_post(request : HttpRequest):
     
     companies = Company.objects.all()
     certificates = Certificate.objects.all()
-    return render(request, 'add_update/add_post.html', {'companies':companies,'certificates':certificates})
+    return render(request, 'main/add_post.html', {'companies':companies,'certificates':certificates})
 
 def view_post(request : HttpRequest,post_id):
     view_post = Post.objects.get(id=post_id)
@@ -80,7 +88,7 @@ def certificate_page(request : HttpRequest):
 def add_certificate(request : HttpRequest):
 
     if not request.user.has_perm("main.add_certificate"):
-        return redirect("main/no_permission.html")
+        return redirect("accounts:no_permission")
 
     if request.method == "POST":
 
@@ -92,7 +100,7 @@ def add_certificate(request : HttpRequest):
         new_certificate.save()
         return redirect("main:certificate_page")
     
-    return render(request, 'add_update/add_certificate.html')
+    return render(request, 'main/add_certificate.html')
 
 def view_certificate(request : HttpRequest,certificate_id):
     view_certificate = Certificate.objects.get(id=certificate_id)
