@@ -9,6 +9,7 @@ from django.db import IntegrityError
 
 
 def main_page(request : HttpRequest):
+    '''This function display the home page'''
 
     companies = Company.objects.all()
     posts = Contact.objects.all()
@@ -17,13 +18,8 @@ def main_page(request : HttpRequest):
     
     return render(request, 'main/index.html', {'companies':companies,'posts':posts,'users':users,'certificates':certificates})
 
-def contact_page(request : HttpRequest):
-    view_contact = Contact.objects.all()
-
-    context = {"view_contact" : view_contact}
-    return render(request, "main/contact.html", context)
-
 def profile_page(request : HttpRequest): 
+    '''This function display the profile page and let the user update his information'''
     
     user : User = request.user
     update_msg = None
@@ -48,6 +44,7 @@ def profile_page(request : HttpRequest):
 
 
 def apply_content(request : HttpRequest,apply_id):
+    '''This function send the user informations for fast apply'''
     
     user : User = request.user
     post = Post.objects.get(id=apply_id)
@@ -67,6 +64,7 @@ def apply_content(request : HttpRequest,apply_id):
 # ---------------------------------------------------POST-----------------------------------------------------------
 
 def post_page(request : HttpRequest):
+    '''This function let the user see what jops are available and what certificate are best to have'''
     
     view_post = Post.objects.all()
 
@@ -74,6 +72,7 @@ def post_page(request : HttpRequest):
     return render(request, "main/post.html", context)
 
 def add_post(request : HttpRequest):
+    '''This function let the staff add a new post'''
 
     if not request.user.has_perm("main.add_post"):
         return redirect("accounts:no_permission")
@@ -95,6 +94,8 @@ def add_post(request : HttpRequest):
     return render(request, 'main/add_post.html', {'companies':companies,'certificates':certificates})
 
 def update_post(request : HttpRequest, post_id):
+    '''This function let the staff update a post'''
+    
 
     if not request.user.has_perm("main.update_post"):
         return redirect("accounts:no_permission")
@@ -120,6 +121,7 @@ def update_post(request : HttpRequest, post_id):
     return render(request, 'main/update_post.html', {'companies':companies,'certificates':certificates,"post":post})
 
 def delete_post(request : HttpRequest, post_id):
+    '''This function let the staff delete a post'''
 
     if not request.user.has_perm("main.delete_post"):
         return redirect("accounts:no_permission")
@@ -129,6 +131,7 @@ def delete_post(request : HttpRequest, post_id):
     return redirect("main:post_page")
 
 def view_post(request : HttpRequest,post_id):
+    '''This function let the staff view a post's details'''
     view_post = Post.objects.get(id=post_id)
 
     context = {"view_post" : view_post}
@@ -137,12 +140,14 @@ def view_post(request : HttpRequest,post_id):
 # ---------------------------------------------------CERTIFICATE-----------------------------------------------------------
 
 def certificate_page(request : HttpRequest):
+    '''This function let the user see the available certificate and direct him to where to get it'''
     view_certificate = Certificate.objects.all()
 
     context = {"view_certificate" : view_certificate}
     return render(request, "main/certificate.html", context)
 
 def add_certificate(request : HttpRequest):
+    '''This function let the staff add a new certificate'''
 
     if not request.user.has_perm("main.add_certificate"):
         return redirect("accounts:no_permission")
@@ -160,6 +165,7 @@ def add_certificate(request : HttpRequest):
     return render(request, 'main/add_certificate.html')
 
 def update_certificate(request : HttpRequest, certificate_id):
+    '''This function let the staff update a certificate'''
 
     certificate = Certificate.objects.get(id=certificate_id)
 
@@ -179,6 +185,7 @@ def update_certificate(request : HttpRequest, certificate_id):
     return render(request, 'main/update_certificate.html', {"certificate": certificate})
 
 def delete_certificate(request : HttpRequest, certificate_id):
+    '''This function let the staff delete a certificate'''
 
     if not request.user.has_perm("main.delete_certificate"):
         return redirect("accounts:no_permission")
@@ -188,6 +195,8 @@ def delete_certificate(request : HttpRequest, certificate_id):
     return redirect("main:certificate_page")
 
 def view_certificate(request : HttpRequest,certificate_id):
+    '''This function let the staff view a certificate's details'''
+
     view_certificate = Certificate.objects.get(id=certificate_id)
 
     context = {"view_certificate" : view_certificate}
@@ -196,12 +205,14 @@ def view_certificate(request : HttpRequest,certificate_id):
 # ---------------------------------------------------COMPANY-----------------------------------------------------------
 
 def company_page(request : HttpRequest):
+    '''This function let the user see the available companies'''
     view_company = Company.objects.all()
 
     context = {"view_company" : view_company}
     return render(request, "main/company.html", context)
 
 def add_company(request : HttpRequest):
+    '''This function let the staff add a company'''
 
     if not request.user.has_perm("main.add_company"):
         return redirect("accounts:no_permission")
@@ -223,6 +234,7 @@ def add_company(request : HttpRequest):
     return render(request, 'main/add_company.html')
 
 def update_company(request : HttpRequest, company_id):
+    '''This function let the staff update a company'''
 
     company = Company.objects.get(id=company_id)
 
@@ -246,6 +258,7 @@ def update_company(request : HttpRequest, company_id):
     return render(request, 'main/update_company.html', {"company": company})
 
 def delete_company(request : HttpRequest, company_id):
+    '''This function let the staff delete a company'''
 
     if not request.user.has_perm("main.delete_company"):
         return redirect("accounts:no_permission")
@@ -255,7 +268,59 @@ def delete_company(request : HttpRequest, company_id):
     return redirect("main:company_page")
 
 def view_company(request : HttpRequest,company_id):
+    '''This function let the staff view a company's details '''
+
     view_company = Company.objects.get(id=company_id)
 
     context = {"view_company" : view_company}
     return render(request, "main/view_company.html", context)
+
+# ---------------------------------------------------CONTACT-----------------------------------------------------------
+
+
+def contact_page(request : HttpRequest):
+    '''This function let the user contact the staffs'''
+    msg = None
+    if request.method == "POST":
+        new_contact = Contact(
+            name= request.POST['name'],
+            email= request.POST['email'],
+            subject= request.POST['subject'],
+            message= request.POST['message'],
+        )
+        new_contact.save()
+        msg = "Your message has been sent"
+        return render(request,"main/contact.html",{"msg":msg})
+    
+    return render(request, "main/contact.html",{"msg":msg})
+
+def contact_detail(request : HttpRequest,contact_id):
+    '''This function let the staff view a contact's details'''
+
+    if not request.user.has_perm("main.contact_detail"):
+        return redirect("accounts:no_permission")
+    
+    contact = Contact.objects.get(id = contact_id)
+
+    context = {"contact" : contact}
+    return render(request, "main/contact_detail.html", context)
+
+def view_contact(request : HttpRequest):
+    '''This function let the staff view all contacts'''
+
+    if not request.user.has_perm("main.view_contact"):
+        return redirect("accounts:no_permission")
+    view_contact = Contact.objects.all()
+
+    context = {"view_contact" : view_contact}
+    return render(request, "main/view_contact.html", context)
+
+def delete_contact(request : HttpRequest,contact_id):
+    '''This function let the staff delete a contact'''
+    
+    if not request.user.has_perm("main.delete_contact"):
+        return redirect("accounts:no_permission")
+
+    contact = Contact.objects.get(id=contact_id)
+    contact.delete()
+    return redirect("main:view_contact")

@@ -5,7 +5,6 @@ app_name = "main"
 
 urlpatterns = [
     path("", views.main_page, name="main_page"),
-    path("contact/", views.contact_page, name="contact_page"),
     path("profile/", views.profile_page, name="profile_page"),
     path("apply/<apply_id>", views.apply_content, name="apply_content"),
 
@@ -27,4 +26,9 @@ urlpatterns = [
     path("view/company/<company_id>/", views.view_company, name="view_company"),
     path("update/company/<company_id>/", views.update_company, name="update_company"),
     path("delete/company/<company_id>/", views.delete_company, name="delete_company"),
+
+    path("contact/", views.contact_page, name="contact_page"),
+    path("contact/detail/<contact_id>/", views.contact_detail, name="contact_detail"),
+    path("view/contact/", views.view_contact, name="view_contact"),
+    path("delete/contact/<contact_id>/", views.delete_contact, name="delete_contact"),
 ]

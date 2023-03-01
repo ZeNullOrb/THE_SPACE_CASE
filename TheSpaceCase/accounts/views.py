@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def register_user(request : HttpRequest):
+    '''This function register New Users'''
     loggin_msg = None
 
     if request.method == "POST":
@@ -33,6 +34,7 @@ def register_user(request : HttpRequest):
 
 
 def login_user(request : HttpRequest):
+    '''This function login User'''
 
     loggin_msg = None
     
@@ -52,6 +54,7 @@ def login_user(request : HttpRequest):
 
 
 def logout_user(request : HttpRequest):
+    '''This function logout User'''
 
     logout(request)
 
@@ -59,5 +62,6 @@ def logout_user(request : HttpRequest):
 
 
 def no_permission(request : HttpRequest):
+    '''This function show no permission message when someone doesn't have access to a page'''
 
     return render(request, "accounts/no_permission.html")

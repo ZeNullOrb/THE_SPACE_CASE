@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %} Post {% endblock %}
+
+{% block content %}
+
+
+<div class="article-clean">
+  <div class="container">
+    <div class="row">
+        {% for contact in view_contact %}
+      <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+        <div class="intro">
+            <h1 class="text-center"><a href="{% url 'main:contact_detail' contact.id %}" style="color: black;">{{ contact.subject }}</a></h1>
+            <p class="text-center"><span class="by">by </span>{{ contact.name }}<span class="date">{{ contact.email }}</span></p>
+        </div>
+        <div class="text">
+          <p class="w3-center content-box">{{ contact.message }}</p>
+        </div>
+        <div class="w3-center" style="margin-bottom: -15px;">
+            <a href="{% url 'main:delete_contact' contact.id %}" class="btn btn-danger btn-round" style="color: white;">Delete Contact</a>
+        </div>
+        <br>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
