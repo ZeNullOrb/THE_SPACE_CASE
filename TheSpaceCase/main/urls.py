@@ -7,6 +7,8 @@ urlpatterns = [
     path("", views.main_page, name="main_page"),
     path("contact/", views.contact_page, name="contact_page"),
     path("profile/", views.profile_page, name="profile_page"),
+    path("apply/<apply_id>", views.apply_content, name="apply_content"),
+
 
     path("post/", views.post_page, name="post_page"),
     path("add/post/", views.add_post, name="add_post"),
@@ -21,6 +23,8 @@ urlpatterns = [
     path("delete/certificate/<certificate_id>/", views.delete_certificate, name="delete_certificate"),
 
     path("company/", views.company_page, name="company_page"),
+    path("add/company/", views.add_company, name="add_company"),
     path("view/company/<company_id>/", views.view_company, name="view_company"),
-    
+    path("update/company/<company_id>/", views.update_company, name="update_company"),
+    path("delete/company/<company_id>/", views.delete_company, name="delete_company"),
 ]

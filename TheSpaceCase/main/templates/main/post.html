@@ -29,8 +29,9 @@
                         <h3 class="card-caption"><a href="{% url 'main:view_post' post.id %}">{{ post.title }}</a></h3>
                           <h6 class="category text-info"><a href="{{ post.company.website }}">{{ post.company }}</a></h6>
                           <h4 class="card-caption content-box">{{ post.content }}</h4>
+                          <a href="{% url 'main:apply_content' post.id %}" class="btn btn-primary btn-round" style="color: white;">Apply NOW!</a>
                           {% for certificate in post.certificate.all %}
-                            <a href="{% url 'main:view_certificate' certificate.id %}" class="btn btn-warning btn-round" style="color: blue;"> <i class="me-1 bi bi-patch-check"></i>{{ certificate.name }}</a>
+                            <a href="{% url 'main:view_certificate' certificate.id %}" class="btn btn-warning btn-round " style="color: blue;"> <i class="me-1 bi bi-patch-check"></i>{{ certificate.name }}</a>
                           {% endfor %}
                         </div>
                       {% if request.user.is_staff %}

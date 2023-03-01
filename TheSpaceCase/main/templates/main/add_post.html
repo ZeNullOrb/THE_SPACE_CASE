@@ -5,38 +5,53 @@
 {% block content %}
 
 <div class="container">
-<h2>Add a New Post</h2>
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="transbox">
-        <div class="row">
-            <div class="col" id = "box">
-                <input type="text" name="title" class="form-control m-2 text-dark" placeholder="Title"/>
-                <textarea class="form-control m-2 text-dark" name="content" placeholder="Content"></textarea>
-                <select name="company" id="company">
-                    {% for company in companies %}
-                    <option value="{{ company.id }}">{{ company.name }}</option>
-                    {% endfor %}
-                </select>
-                <div class="form-check" name="certificate">
+    <h2>Update Post</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="article-clean">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                  <div class="intro">
+                      <h1><input type="text" class="w3-center" style="border-radius: 10px; width: 900px;" name="title" placeholder="Title"></h1>
+                      <p class="text-center">
+                          <span class="by">
+                              <select name="company" id="company" >
+                              {% for company in companies %}
+                              <option value="" selected>Select a Company</option>
+                              <option value="{{ company.name }}" >{{ company.name }}</option>
+                              {% endfor %}
+                              </select>
+                          </span>
+                      </p>
+                      <div class="w3-center container">
+                          <input type="file" name="image" class="form-control"/>
+                      </div>
+                  </div>
+                  <div class="w3-center">
+                    <p><textarea name="content" style="border-radius: 10px;" id="content" cols="100" rows="5" placeholder="Content"></textarea></p>
+                  </div>
+                  <div style="margin-left: 135px;">
                     {% for certificate in certificates %}
-                    <input class="form-check-input" type="checkbox" value="{{ certificate.id }}" id="flexCheckDefault" 
+                    <input class="form-check-input" type="checkbox" name="certificate_list" value="{{ certificate.id }}" id="flexCheckDefault" 
                     {% if certificate.name in post.certificate %} checked {% endif %}>
                     <label class="form-check-label" for="flexCheckDefault">
                         {{ certificate.name }}
                     </label>
-                    
+                    <br>
                     {% endfor %}
+                  </div>
+                    
+                  <br>
+                  <div class="w3-center">
+                      <input type="submit" class="btn btn-dark mt-3" value="Add Post" />
+                  </div>
+                  
                 </div>
-                <br>
-
-                <input type="submit" class="btn btn-dark mt-3" value="New Post" />
+              </div>
             </div>
-        </div>
+          </div>
+    </form>
     </div>
-</form>
-</div>
-
-
 
 {% endblock %}

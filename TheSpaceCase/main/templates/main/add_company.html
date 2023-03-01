@@ -1,0 +1,74 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %} Add a New Companys {% endblock %}
+
+{% block content %}
+
+<style>
+    
+    input{
+        border-radius: 20px;
+    }
+    textarea{
+        border-radius: 20px;
+        width: 800px;
+    }
+</style>
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="article-clean">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+              <div class="intro">
+                    <h1 class="text-center">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 950px;" name="name" 
+                        type="text" placeholder="Company Name" required>
+                    </h1>
+                    <p class="text-center">
+                        <span class="by">
+                            <input class="w3-center" style="padding: 5px 0 5px 0; width: 400px;" name="email" 
+                            type="email" placeholder="Company email" required>
+                        </span>
+                    </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 400px;" name="address" 
+                        type="text" placeholder="Company address" required>
+                    </span>
+                  </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 200px;" name="phone" 
+                        type="text" placeholder="Company phone" required>
+                    </span>
+                  </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <input class="w3-center" style="padding: 5px 0 5px 0; width: 450px;" name="website" 
+                        type="url" placeholder="Company website" required>
+                    </span>
+                  </p>
+                  <p class="text-center">
+                    <span class="by">
+                        <textarea class="w3-center" name="description" id="description" cols="30" rows="10" 
+                        placeholder="Company description" required></textarea>
+                    </span>
+                  </p>
+                  <div class="w3-center container">
+                    <input type="file" name="image" class="form-control"/>
+                  </div>
+              </div>
+                <div class="w3-center" style="margin-bottom: -15px;"><button class="btn btn-round" style="color: white; background-color: #506568;"> <i class="fa fa-envelope me-2"></i>New Company</button></div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>      
+</form>
+
+
+{% endblock %}

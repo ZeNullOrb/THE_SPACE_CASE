@@ -46,3 +46,13 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title}"
+    
+class ApplyContent(models.Model):
+
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    title = models.CharField(max_length=512)
+    name = models.CharField(max_length=512)
+    email = models.EmailField()
+
+    def __str__(self) -> str:
+        return f"{self.name}"

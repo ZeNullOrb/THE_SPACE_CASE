@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Company,Certificate,Post,Contact
+from .models import Company,Certificate,Post,Contact,ApplyContent
 from django.db import IntegrityError
 
 # Create your views here.
@@ -27,23 +27,18 @@ def profile_page(request : HttpRequest):
     
     user : User = request.user
     update_msg = None
-    def username_auth(username_check):
-        user : User = request.user
-        if username_check in request.FILES:
-            if User.objects.filter(username=request.POST['username']).exists():
-                update_msg = "User already exist"
-                return render(request, "main/profile.html", {"msg" : update_msg})
-            else:
-                user.username = request.POST['username']
-                user.save()
+        
     if request.method == "POST":
-        username_check = request.POST['username']
-        username_auth(username_check)
+        if User.objects.filter(username=request.POST['username']).exists():
+            # update_msg = "User already exist"
+            exit
+        else:
+            user.username = request.POST['username']
+            # update_msg = "Updated successfully!"
         user.first_name = request.POST["first_name"]   
         user.last_name = request.POST["last_name"]     
         user.email = request.POST["email"]
         user.save()
-        update_msg = "Updated successfully!"
 
         return render(request, "main/profile.html", {"msg" : update_msg})
 
@@ -51,6 +46,21 @@ def profile_page(request : HttpRequest):
     context = {"user" : user, "msg" : update_msg}
     return render(request, "main/profile.html", context)
 
+
+def apply_content(request : HttpRequest,apply_id):
+    
+    user : User = request.user
+    post = Post.objects.get(id=apply_id)
+
+    apply = ApplyContent(
+        company = post.company,
+        title = post.title,
+        name = user.first_name,
+        email = user.email
+    )
+    apply.save()
+
+    return redirect("main:post_page")
 
 
 
@@ -67,14 +77,16 @@ def add_post(request : HttpRequest):
 
     if not request.user.has_perm("main.add_post"):
         return redirect("accounts:no_permission")
-
+    
     if request.method == "POST":
-        company = Company.objects.get(id=request.POST["company"])
-        certificates = Certificate.objects.get(id=request.POST["certificate"])
+        company = Company.objects.get(name=request.POST["company"])
         #to add a new post
-        new_post = Post(title= request.POST["title"], content = request.POST["content"], company=company)
+        new_post = Post(title= request.POST["title"], content = request.POST["content"], company=company,image = request.FILES["image"])
         new_post.save()
-        new_post.certificate.add(certificates)
+        certificateList = request.POST.getlist('certificate_list')
+        for certificate in certificateList:
+            certificateItem = Certificate.objects.get(id=certificate)
+            new_post.certificate.add(certificateItem)
         new_post.save()
         return redirect("main:post_page")
     
@@ -90,13 +102,16 @@ def update_post(request : HttpRequest, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == "POST":
         company = Company.objects.get(id=request.POST["company"])
-        certificates = Certificate.objects.get(id=request.POST["certificate"])
+        
         #to update a post
         post.title = request.POST["title"] 
         post.content = request.POST["content"]
         post.company=company
         post.save()
-        post.certificate.add(certificates)
+        certificateList = request.POST.getlist('certificate_list')
+        for certificate in certificateList:
+            certificateItem = Certificate.objects.get(id=certificate)
+            post.certificate.add(certificateItem)
         post.save()
         return redirect("main:post_page")
     
@@ -185,6 +200,59 @@ def company_page(request : HttpRequest):
 
     context = {"view_company" : view_company}
     return render(request, "main/company.html", context)
+
+def add_company(request : HttpRequest):
+
+    if not request.user.has_perm("main.add_company"):
+        return redirect("accounts:no_permission")
+
+    if request.method == "POST":
+
+        #to add a new company
+        new_company = Company(name= request.POST["name"],
+                              image = request.FILES["image"],
+                              email= request.POST["email"],
+                              address= request.POST["address"],
+                              phone= request.POST["phone"],
+                              website= request.POST["website"],
+                              description= request.POST["description"],
+                            )
+        new_company.save()
+        return redirect("main:company_page")
+    
+    return render(request, 'main/add_company.html')
+
+def update_company(request : HttpRequest, company_id):
+
+    company = Company.objects.get(id=company_id)
+
+    if not request.user.has_perm("main.update_company"):
+        return redirect("accounts:no_permission")
+
+    if request.method == "POST":
+
+        #to update a company
+        company.name= request.POST["name"]
+        if "image" in request.FILES:
+            company.image = request.FILES["image"]
+        company.email= request.POST["email"]
+        company.address= request.POST["address"]
+        company.phone= request.POST["phone"]
+        company.website= request.POST["website"]
+        company.description= request.POST["description"]
+        company.save()
+        return redirect("main:company_page")
+    
+    return render(request, 'main/update_company.html', {"company": company})
+
+def delete_company(request : HttpRequest, company_id):
+
+    if not request.user.has_perm("main.delete_company"):
+        return redirect("accounts:no_permission")
+    
+    company = Company.objects.get(id=company_id)
+    company.delete()
+    return redirect("main:company_page")
 
 def view_company(request : HttpRequest,company_id):
     view_company = Company.objects.get(id=company_id)

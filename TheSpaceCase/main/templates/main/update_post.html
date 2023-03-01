@@ -5,42 +5,54 @@
 {% block content %}
 
 <div class="container">
-<h2>Add a New Post</h2>
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="transbox">
-        <div class="row">
-            <div class="col" id = "box">
-                <input type="text" name="title" class="form-control m-2 text-dark" placeholder="Title"/>
-                <textarea class="form-control m-2 text-dark" name="content" placeholder="Content"></textarea>
-                <select name="company" id="company">
-                    {% for company in companies %}
-                    <option value="{{ company.id }}">{{ company.name }}</option>
-                    {% endfor %}
-                </select>
-                <div class="form-check" name="certificate">
+    <h2>Update Post</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="article-clean">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                  <div class="intro">
+                      <h1><input type="text" class="w3-center" style="border-radius: 10px; width: 900px;" name="title" value="{{ post.title }}" placeholder="{{ post.title }}"></h1>
+                      <p class="text-center">
+                          <span class="by">
+                              <select name="company" id="company" >
+                              {% for company in companies %}
+                              <option value="{{ company.id }}">{{ company.name }}</option>
+                              {% endfor %}
+                              </select>
+                          </span>
+                      </p>
+                      <div class="w3-center container">
+                            <img class="img-fluid" src="{{ post.image.url }}" alt="">
+                          <input type="file" name="image" class="form-control" value="{{ post.image.url }}"/>
+                      </div>
+                      
+                  </div>
+                  <div class="w3-center">
+                    <p><textarea name="content" style="border-radius: 10px;" id="content" cols="100" rows="5" value ="{{ post.content }}">{{ post.content }}</textarea></p>
+                  </div>
+                  <div style="margin-left: 135px;">
                     {% for certificate in certificates %}
-                    <input class="form-check-input" type="checkbox" value="{{ certificate.id }}" id="flexCheckDefault" 
+                    <input class="form-check-input" type="checkbox" name="certificate_list" value="{{ certificate.id }}" id="flexCheckDefault" 
                     {% if certificate.name in post.certificate %} checked {% endif %}>
                     <label class="form-check-label" for="flexCheckDefault">
                         {{ certificate.name }}
                     </label>
-                    
+                    <br>
                     {% endfor %}
+                  </div>
+                    
+                  <br>
+                  <div class="w3-center">
+                      <input type="submit" class="btn btn-dark mt-3" value="Update Post" />
+                  </div>
+                  
                 </div>
-                <br>
-
-                <div class="w3-center" style="margin-bottom: -15px;">
-                    <button class="btn btn-round" style="color: white; background-color: #506568;">
-                        <i class="fa fa-envelope me-2"></i>Update Post
-                    </button>
-                </div>
+              </div>
             </div>
-        </div>
+          </div>
+    </form>
     </div>
-</form>
-</div>
-
-
 
 {% endblock %}
